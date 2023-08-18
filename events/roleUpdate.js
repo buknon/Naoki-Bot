@@ -1,13 +1,14 @@
 const Discord = require('discord.js')
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const wl = new db.table("Whitelist")
-const aru = new db.table("antiroleupdate")
-const ad = new db.table("Antidown")
-const alerte = new db.table("AlertePerm")
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const wl = db.table("Whitelist")
+const aru = db.table("antiroleupdate")
+const ad = db.table("Antidown")
+const alerte = db.table("AlertePerm")
+const cl = db.table("Color")
 const config = require('../config')
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
         }
 
 
-        const audit = await oldRole.guild.fetchAuditLogs({type: "ROLE_UPDATE"}).then((audit) => audit.entries.first())
+        const audit = await oldRole.guild.fetchAuditLogs({ type: "ROLE_UPDATE" }).then((audit) => audit.entries.first())
         if (audit.executor.id === client.user.id) return
 
         let isOn = await aru.fetch(`config.${oldRole.guild.id}.antiroleupdate`)
@@ -49,7 +50,7 @@ module.exports = {
             if (audit?.executor?.id == oldRole?.guild?.ownerId) return
 
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${oldRole.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
-            
+
             if (audit.action == 'ROLE_UPDATE') {
 
                 try {
@@ -59,7 +60,7 @@ module.exports = {
                     if (oldRole.hoist !== newRole.hoist) newRole.setHoist(oldRole.hoist)
                     if (oldRole.mentionable !== newRole.mentionable) newRole.setMentionable(oldRole.mentionable)
                     if (oldRole.rawPosition !== newRole.narawPositionme) newRole.setPosition(oldRole.rawPosition)
-                } catch(e){}
+                } catch (e) { }
 
                 if (punish.get(`sanction_${oldRole.guild.id}`) === "ban") {
                     oldRole.guild.members.ban(audit.executor.id, { reason: `Antirole Update` })

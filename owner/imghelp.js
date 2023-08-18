@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
 
 module.exports = {
     name: 'imghelp',

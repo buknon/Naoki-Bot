@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const fs = require('fs')
- const config = require("../config.js")
+const config = require("../config.js")
 
 module.exports = {
     name: 'avatar',
@@ -14,11 +15,11 @@ module.exports = {
         if (color == null) color = config.app.color
 
         let member = message.mentions.users.first()
-        if (!member){
-            try{
+        if (!member) {
+            try {
                 member = await client.users.fetch(args[0])
             }
-            catch(e){
+            catch (e) {
                 member = message.author
             }
         }

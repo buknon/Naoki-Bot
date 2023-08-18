@@ -1,10 +1,11 @@
 const Discord = require('discord.js')
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const wl = new db.table("Whitelist")
-const atc = new db.table("antichannelcreate")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const wl = db.table("Whitelist")
+const atc = db.table("antichannelcreate")
 const config = require('../config')
 
 module.exports = {
@@ -22,8 +23,8 @@ module.exports = {
         }
 
         if (atc.get(`config.${channel.guild.id}.antichannelcreate`) == true) {
-            const audit = await channel.guild.fetchAuditLogs({type: "CHANNEL_CREATE"}).then((audit) => audit.entries.first())
-        if (audit.executor === client.user.id) return
+            const audit = await channel.guild.fetchAuditLogs({ type: "CHANNEL_CREATE" }).then((audit) => audit.entries.first())
+            if (audit.executor === client.user.id) return
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
             channel.delete()
 

@@ -1,7 +1,8 @@
 const Discord = module.require("discord.js");
-const db = require('quick.db')
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const config = require("../config.js")
 const footer = config.app.footer
 const emote = require('../emotes.json')
 module.exports = {

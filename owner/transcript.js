@@ -1,9 +1,10 @@
 const { MessageActionRow, MessageSelectMenu } = require('discord.js')
 const config = require('../config')
-const db = require('quick.db')
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
 const moment = require('moment')
 const fs = require('fs')
-const owner = new db.table("Owner")
+const owner = db.table("Owner")
 const emote = require('../emotes.json')
 
 module.exports = {

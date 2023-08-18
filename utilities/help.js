@@ -1,9 +1,10 @@
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require('quick.db')
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const owner = new db.table("Owner")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const owner = db.table("Owner")
 const footer = config.app.footer
 const paginationEmbed = require('discordjs-button-pagination')
 module.exports = {
@@ -290,7 +291,7 @@ Permission Gestion Permissions
                 .setFooter({ text: `${footer} | Prefix actuel : ${pf}` })
                 .setColor(color)
 
-              
+
 
             const owner = new Discord.MessageEmbed()
                 .setDescription(`
@@ -359,7 +360,7 @@ Permission Gestion Permissions
 
 
 
-                const buyer = new Discord.MessageEmbed()
+            const buyer = new Discord.MessageEmbed()
                 .setDescription(`
                               
     \`\`\`fix
@@ -380,7 +381,7 @@ Permission Gestion Permissions
                 .setColor(color)
 
 
-                
+
             const button1 = new Discord.MessageButton()
                 .setCustomId('gauche')
                 .setLabel('<<<')
@@ -403,8 +404,8 @@ Permission Gestion Permissions
                 owner,
                 buyer,
                 help
-                
-                
+
+
 
             ];
 
@@ -504,7 +505,7 @@ Permission Gestion Permissions
                 .setColor(color)
                 .setFooter({ text: `${footer} | Prefix actuel : ${pf}` })
 
-          
+
 
             const Owner = new Discord.MessageEmbed()
                 .setDescription(`
@@ -995,10 +996,10 @@ Change le nom du bot
                         msg.edit({ embeds: [jeux], components: [row] });
                     }
                     if (value === "activity") {
-                        msg.edit({ embeds: [activity], components: [row] });    
+                        msg.edit({ embeds: [activity], components: [row] });
                     }
-                    
-                   
+
+
                 })
             })
         }
@@ -1478,7 +1479,7 @@ Change le nom du bot
                 antiraid,
                 proprio,
                 activity
-               
+
 
             ];
 
@@ -1490,6 +1491,6 @@ Change le nom du bot
             paginationEmbed(message, pages, buttonList);
 
         }
-            
+
     }
 }

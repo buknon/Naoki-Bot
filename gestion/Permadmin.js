@@ -1,10 +1,11 @@
 const Discord = require("discord.js");
-const db = require("quick.db");
-const owner = new db.table("Owner")
-const alerte = new db.table("AlertePerm")
-const cl = new db.table("Color")
- const config = require("../config.js")
-const pgp = new db.table("PermGp")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const alerte = db.table("AlertePerm")
+const cl = db.table("Color")
+const config = require("../config.js")
+const pgp = db.table("PermGp")
 const emote = require('../emotes.json')
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
     description: `Permet de Désactive toutes les permissions administateur du serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`)|| message.member.roles.cache.has(pgp.fetch(`permgp_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(pgp.fetch(`permgp_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             let color = cl.fetch(`color_${message.guild.id}`)
             if (color == null) color = config.app.color

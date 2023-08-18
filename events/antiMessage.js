@@ -1,12 +1,13 @@
-const db = require("quick.db")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
 const config = require('../config')
 const Discord = require('discord.js')
-const rlog = new db.table("raidlog")
-const wl = new db.table("Whitelist")
-const p = new db.table("Prefix")
-const al = new db.table("AntiLink")
-const ae = new db.table("Antieveryone")
-const owner = new db.table("Owner")
+const rlog = db.table("raidlog")
+const wl = db.table("Whitelist")
+const p = db.table("Prefix")
+const al = db.table("AntiLink")
+const ae = db.table("Antieveryone")
+const owner = db.table("Owner")
 const linksall = [
     'discord.gg',
     'dsc.bio',

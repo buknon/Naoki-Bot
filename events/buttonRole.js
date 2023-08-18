@@ -1,7 +1,8 @@
 
 const config = require('../config')
-const db = require('quick.db')
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 
 module.exports = {
     name: 'interactionCreate',
@@ -11,7 +12,7 @@ module.exports = {
         if (color == null) color = config.app.color
 
         if (!interaction.isButton()) return;
-	
+
         const donnée = await db.get(`buttonrole_${interaction.message.id}`)
         if (!donnée) return
 

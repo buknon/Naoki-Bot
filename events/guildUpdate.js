@@ -1,11 +1,12 @@
 const Discord = require('discord.js')
 const config = require('../config')
-const db = require("quick.db")
-const cl = new db.table("Color")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const agu = new db.table("Guildupdate")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const agu = db.table("Guildupdate")
 
 module.exports = {
     name: 'guildUpdate',
@@ -21,7 +22,7 @@ module.exports = {
 
         if (agu.get(`guildupdate_${guild.id}`) === true) {
 
-            const action = await guild.fetchAuditLogs({type: "GUILD_UPDATE"}).then(audits => audits.entries.first())
+            const action = await guild.fetchAuditLogs({ type: "GUILD_UPDATE" }).then(audits => audits.entries.first())
             if (action.executor.id === client.user.id) return;
 
             let perm = config.app.owners == action.executor.id || config.app.funny == action.executor.id || owner.get(`owners.${action.executor.id}`) === true

@@ -1,9 +1,10 @@
 const Discord = require('discord.js')
-const db = require("quick.db")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
 const config = require('../config')
-const owner = new db.table("Owner")
-const wl = new db.table("Whitelist")
-const blv = new db.table("blvoc")
+const owner = db.table("Owner")
+const wl = db.table("Whitelist")
+const blv = db.table("blvoc")
 const footer = config.app.footer
 
 

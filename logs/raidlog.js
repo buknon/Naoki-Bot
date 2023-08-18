@@ -1,10 +1,11 @@
 const { MessageEmbed } = require('discord.js')
 const Discord = require('discord.js')
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const raidlog = new db.table("raidlog")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const raidlog = db.table("raidlog")
 const footer = config.app.footer
 const emote = require('../emotes.json')
 

@@ -2,9 +2,10 @@ const ms = require('ms'),
     { MessageEmbed, MessageActionRow, MessageSelectMenu, MessageButton } = require('discord.js');
 
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const config = require("../config.js")
 
 module.exports = {
     name: 'ticket',
@@ -102,7 +103,7 @@ module.exports = {
                                     value: 'rien',
                                     emoji: "<:noo:1072943971489296497>"
                                 }
-                              
+
                             ]),
                     );
 
@@ -413,8 +414,8 @@ module.exports = {
                                         if (messag.embeds[0].image) embed.setImage(messag.embeds[0].image.url)
                                         if (messag.embeds[0].thumbnail) embed.setThumbnail(messag.embeds[0].thumbnail.url)
                                         if (messag.embeds[0].footer) {
-                                            if (messag.embeds[0].footer.iconURL) embed.setFooter({text: messag.embeds[0].footer.text, iconURL: messag.embeds[0].footer.iconURL})
-                                            else embed.setFooter({text: messag.embeds[0].footer.text, iconURL: messag.embeds[0].footer.iconURL})
+                                            if (messag.embeds[0].footer.iconURL) embed.setFooter({ text: messag.embeds[0].footer.text, iconURL: messag.embeds[0].footer.iconURL })
+                                            else embed.setFooter({ text: messag.embeds[0].footer.text, iconURL: messag.embeds[0].footer.iconURL })
                                         }
                                         if (messag.embeds[0].author) {
                                             if (messag.embeds[0].author.iconURL) {

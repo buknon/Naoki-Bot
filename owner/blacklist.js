@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 const footer = config.app.footer
 
 module.exports = {
@@ -16,28 +17,28 @@ module.exports = {
             let color = cl.fetch(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
-           
+
 
             if (args[0]) {
                 const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
-              
-
-               if (!member)  return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
 
 
+                if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
 
-                    if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) return;
+
+
+                if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) return;
 
                 if (db.get(`blacklist.${member.id}`) === member.id) { return message.channel.send(`${member.username} est déjà blacklist`) }
-                
-              
-           
-       
+
+
+
+
 
                 db.push(`${config.app.blacklist}.blacklist`, member.id)
 
-               
+
 
 
                 db.set(`blacklist.${member.id}`, member.id)
@@ -58,7 +59,7 @@ module.exports = {
                     .setFooter({ text: `${footer}` })
                 message.channel.send({ embeds: [embed] })
 
-                
+
             }
         }
     }

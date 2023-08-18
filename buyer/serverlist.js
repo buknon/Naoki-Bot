@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const footer = config.app.footer
 
 module.exports = {
@@ -16,15 +17,15 @@ module.exports = {
             if (color == null) color = config.app.color
 
             let description =
-            `Serveurs totaux : ${client.guilds.cache.size}\n\n` + client.guilds.cache
-            .sort((a, b) => b.memberCount - a.memberCount)
-            .map(r => r)
-            .map((r, i) => `**${i + 1}** - ${r.name} ・ ${r.memberCount} Membres ・ ID : ${r.id}`)
-            .slice(0, 10)
-            .join('\n')
-            
+                `Serveurs totaux : ${client.guilds.cache.size}\n\n` + client.guilds.cache
+                    .sort((a, b) => b.memberCount - a.memberCount)
+                    .map(r => r)
+                    .map((r, i) => `**${i + 1}** - ${r.name} ・ ${r.memberCount} Membres ・ ID : ${r.id}`)
+                    .slice(0, 10)
+                    .join('\n')
 
-         
+
+
 
             const embed = new Discord.MessageEmbed()
                 .setColor(color)

@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
-const owner = new db.table("Owner")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const owner = db.table("Owner")
+const config = require("../config.js")
 const footer = config.app.footer
 
 module.exports = {
@@ -25,9 +26,9 @@ module.exports = {
             (role) => role.name === args.join(" ").slice(1)
           ) || message.mentions.roles.first() || message.guild.roles.cache.get(args[1]);
 
-            if (!role){
-              return message.reply(`Aucun rôle de trouvé pour \`${args[1] || "rien"}\``)
-            }
+        if (!role) {
+          return message.reply(`Aucun rôle de trouvé pour \`${args[1] || "rien"}\``)
+        }
 
         if (message.guild.me.roles.highest.comparePositionTo(role) < 0) {
           return message.reply(`Mon rôle n'est pas assez haut pour que j'ajoute le rôle **${role.name}** !`);

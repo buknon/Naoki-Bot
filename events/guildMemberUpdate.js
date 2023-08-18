@@ -1,12 +1,13 @@
 const Discord = require('discord.js')
 const config = require('../config')
-const db = require('quick.db')
-const alerte = new db.table("AlertePerm")
-const cl = new db.table("Color")
-const aa = new db.table("Antiadmin")
-const punish = new db.table("Punition")
-const rlog = new db.table("raidlog")
-const owner = new db.table("Owner")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const alerte = db.table("AlertePerm")
+const cl = db.table("Color")
+const aa = db.table("Antiadmin")
+const punish = db.table("Punition")
+const rlog = db.table("raidlog")
+const owner = db.table("Owner")
 
 module.exports = {
     name: 'guildMemberUpdate',
@@ -63,8 +64,8 @@ module.exports = {
 
                 if (owner.get(`owners.${executor.id}`) || config.app.owners === executor.id === true || client.user.id === executor.id === true) return
 
-                const audit = await oldMember.guild.fetchAuditLogs({type: "MEMBER_ROLE_UPDATE"}).then((audit) => audit.entries.first())
-        if (audit.executor === client.user.id) return
+                const audit = await oldMember.guild.fetchAuditLogs({ type: "MEMBER_ROLE_UPDATE" }).then((audit) => audit.entries.first())
+                if (audit.executor === client.user.id) return
                 if (audit?.executor?.id == client.user.id) return
 
                 let oldRoleIDs = [];
@@ -78,16 +79,16 @@ module.exports = {
 
                 if (newRoleIDs.length > oldRoleIDs.length) {
                     function filterOutOld(id) {
-                       for (var i = 0; i < oldRoleIDs.length; i++) {
-                           if (id === oldRoleIDs[i]) {
-                               return false;
-                           }
-                       }
-                       return true;
+                        for (var i = 0; i < oldRoleIDs.length; i++) {
+                            if (id === oldRoleIDs[i]) {
+                                return false;
+                            }
+                        }
+                        return true;
                     }
                     let onlyRole = newRoleIDs.filter(filterOutOld);
                     var IDNum = onlyRole[0];
-                    }
+                }
 
                 oldMember.guild.members.resolve(newMember).roles.cache.forEach(role => {
                     if (role.name !== '@everyone') {

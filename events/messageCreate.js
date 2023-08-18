@@ -1,9 +1,10 @@
-const db = require("quick.db")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
 const config = require('../config')
 const Discord = require('discord.js')
-const rlog = new db.table("raidlog")
-const wl = new db.table("Whitelist")
-const p = new db.table("Prefix")
+const rlog = db.table("raidlog")
+const wl = db.table("Whitelist")
+const p = db.table("Prefix")
 
 module.exports = {
     name: "messageCreate",

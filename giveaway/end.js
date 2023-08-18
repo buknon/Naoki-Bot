@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 let started_time_duration = ""
 let time_duration = ""
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const ml = new db.table("giveawaylog")
-const pga = new db.table("PermGa")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const ml = db.table("giveawaylog")
+const pga = db.table("PermGa")
 
 module.exports = {
     name: 'end',
@@ -24,7 +25,7 @@ module.exports = {
             if (color == null) color = config.app.color
 
             if (!args[0])
-            return message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``)
+                return message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``)
 
             client.giveawaysManager.end(args[0], 'Giveaway annulé, aucun membre n\'a participé.', {
                 winMessage: 'Félicitation, {winners}! Tu as gagné **{this.prize}**!',
@@ -34,18 +35,18 @@ module.exports = {
                     error: 'Aucun membre de participe à ce giveaway, le(s) gagnant(s) ne peuvent pas être choisi!'
                 }
             })
-            .catch(() => message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``))
-            .then(() => {
-                message.reply('Giveaway Fini.')
+                .catch(() => message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``))
+                .then(() => {
+                    message.reply('Giveaway Fini.')
 
-                const embed = new Discord.MessageEmbed()
-                .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`terminé un giveaway\` dans <#${giveawayChannel.id}>`)
-                .setTimestamp()
-                .setFooter({ text: `📚` })
-            const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.giveawaylog`))
-            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
-        })
+                    const embed = new Discord.MessageEmbed()
+                        .setColor(color)
+                        .setDescription(`<@${message.author.id}> a \`terminé un giveaway\` dans <#${giveawayChannel.id}>`)
+                        .setTimestamp()
+                        .setFooter({ text: `📚` })
+                    const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.giveawaylog`))
+                    if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
+                })
         }
     }
 }

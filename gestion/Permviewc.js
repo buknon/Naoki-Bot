@@ -1,9 +1,10 @@
 const Discord = require("discord.js");
-const db = require("quick.db");
-const owner = new db.table("Owner")
-const pgp = new db.table("PermGp")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const pgp = db.table("PermGp")
+const cl = db.table("Color")
+const config = require("../config.js")
 const emote = require('../emotes.json')
 
 module.exports = {
@@ -17,28 +18,28 @@ module.exports = {
 
             let color = cl.fetch(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
-      
-            const roles = message.guild.roles.cache.filter(role =>  role.permissions.any(["VIEW_CHANNEL"]));
-            roles.forEach(role => role.setPermissions(role.permissions.remove(["VIEW_CHANNEL"])).catch(() => {}))
-            
+
+            const roles = message.guild.roles.cache.filter(role => role.permissions.any(["VIEW_CHANNEL"]));
+            roles.forEach(role => role.setPermissions(role.permissions.remove(["VIEW_CHANNEL"])).catch(() => { }))
+
             const permEmbed = new Discord.MessageEmbed()
-              .setDescription('**Je désactive les permissions Voir les salons à tous les rôles.**')
-              .setColor(color)
-           
-              message.channel.send({embeds: [permEmbed]})
+                .setDescription('**Je désactive les permissions Voir les salons à tous les rôles.**')
+                .setColor(color)
 
-              const channellogs = db.get(` ${message.guild.id}.alerteperm`)
-              let roleping = db.get(`role_${message.guild.id}`)
-              if (roleping === null) roleping = "@everyone"
+            message.channel.send({ embeds: [permEmbed] })
 
-              const embed = new Discord.MessageEmbed()
-              .setTitle(`${message.author.tag} à désactivé toutes les __permissions voir les salons__ du serveur`)
-              .setDescription(`${emote.administration.loading} Merci de patienter avant de réactiver les permissions le temps que le problème soit réglé\n Executeur : <@${message.author.id}>`)
-              .setTimestamp()
-              .setColor(color)
-              .setFooter({ text: `📚` })
-          client.channels.cache.get(channellogs).send({ content: `${roleping}`, embeds: [embed] }).catch(() => false)
-      
+            const channellogs = db.get(` ${message.guild.id}.alerteperm`)
+            let roleping = db.get(`role_${message.guild.id}`)
+            if (roleping === null) roleping = "@everyone"
+
+            const embed = new Discord.MessageEmbed()
+                .setTitle(`${message.author.tag} à désactivé toutes les __permissions voir les salons__ du serveur`)
+                .setDescription(`${emote.administration.loading} Merci de patienter avant de réactiver les permissions le temps que le problème soit réglé\n Executeur : <@${message.author.id}>`)
+                .setTimestamp()
+                .setColor(color)
+                .setFooter({ text: `📚` })
+            client.channels.cache.get(channellogs).send({ content: `${roleping}`, embeds: [embed] }).catch(() => false)
+
         }
     }
 }

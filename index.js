@@ -1,6 +1,6 @@
 const { Client, Intents, Collection } = require('discord.js');
 const config = require('./config')
-const { Player } = require('discord-player');
+// const { Player } = require('discord-player');
 ms = require("ms")
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_WEBHOOKS, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, Intents.FLAGS.DIRECT_MESSAGE_TYPING],
@@ -20,7 +20,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
         reaction: "🎉"
     }
 });
-global.player = new Player(client, config.app.discordPlayer);
+// global.player = new Player(client, config.app.discordPlayer);
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  modération Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
 const commandFiles = readdirSync('./moderation').filter(file => file.endsWith('.js'));
@@ -79,11 +79,11 @@ for (const file of giveawayFiles) {
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  games Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
-const gamesFiles = readdirSync('./games').filter(file => file.endsWith('.js'));
-for (const file of gamesFiles) {
-    const command = require(`./games/${file}`);
-    client.commands.set(command.name, command);
-}
+// const gamesFiles = readdirSync('./games').filter(file => file.endsWith('.js'));
+// for (const file of gamesFiles) {
+//     const command = require(`./games/${file}`);
+//     client.commands.set(command.name, command);
+// }
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  antiraid Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
@@ -103,11 +103,11 @@ for (const file of buyerFiles) {
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  music Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
-const musicFiles = readdirSync('./music').filter(file => file.endsWith('.js'));
-for (const file of musicFiles) {
-    const command = require(`./music/${file}`);
-    client.commands.set(command.name, command);
-}
+// const musicFiles = readdirSync('./music').filter(file => file.endsWith('.js'));
+// for (const file of musicFiles) {
+//     const command = require(`./music/${file}`);
+//     client.commands.set(command.name, command);
+// }
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  voice Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
@@ -130,6 +130,6 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(client, ...args));
     }
 }
-process.on("unhandledRejection", err => {console.log(err);})
+process.on("unhandledRejection", err => { console.log(err); })
 
 client.login(config.app.token);

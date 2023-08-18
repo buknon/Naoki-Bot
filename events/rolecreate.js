@@ -1,10 +1,11 @@
 const Discord = require('discord.js')
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const wl = new db.table("Whitelist")
-const atr = new db.table("antirolecreate")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const wl = db.table("Whitelist")
+const atr = db.table("antirolecreate")
 const config = require('../config')
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
 
     async execute(client, role) {
 
-        const audit = await role.guild.fetchAuditLogs({type: "ROLE_CREATE"}).then((audit) => audit.entries.first())
+        const audit = await role.guild.fetchAuditLogs({ type: "ROLE_CREATE" }).then((audit) => audit.entries.first())
         if (audit.executor === client.user.id) return
 
         if (atr.fetch(`config.${role.guild.id}.antirolecreate`) == true) {

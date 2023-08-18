@@ -1,8 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 require("moment-duration-format");
- const config = require("../config.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const footer = config.app.footer
 
 module.exports = {
@@ -17,9 +18,9 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setTitle('Votre Bot')
                 .setDescription(`Cliquez ici pour inviter votre bot [${client.user.tag}](https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
-                .setFooter({text: footer})
+                .setFooter({ text: footer })
                 .setColor(color)
-                
+
             message.reply({ embeds: [embed] })
         }
     }

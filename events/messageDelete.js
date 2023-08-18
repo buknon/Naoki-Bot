@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require("quick.db")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
 const { Client, Intents, Collection } = require('discord.js');
-const msglog = new db.table("msglog")
+const msglog = db.table("msglog")
 const color = config.app.color
 var getNow = () => { return { time: new Date().toLocaleString("en-GB", { timeZone: "Europe/Paris", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" }) } }
 
@@ -16,11 +17,11 @@ module.exports = {
         client.snipes = new Map()
 
 
-    client.snipes.set(message.channel.id, {
-        content: message.content,
-        author: message.author,
-        image: message.attachments.first() ? message.attachments.first().proxyURL : null
-    })
+        client.snipes.set(message.channel.id, {
+            content: message.content,
+            author: message.author,
+            image: message.attachments.first() ? message.attachments.first().proxyURL : null
+        })
 
 
         if (!message.author) return
@@ -37,7 +38,7 @@ module.exports = {
             type: 'MESSAGE_DELETE',
         }),
             deletionLog = fetchedLogs.entries.first();
-            const { executor, target } = deletionLog;
+        const { executor, target } = deletionLog;
         const embed1 = new Discord.MessageEmbed()
             .setTitle(`❌ Suppression`)
             .setDescription(`Message supprimé de <@${message.author.id}> dans [\`${message.channel.name}\`](https://discord.com/channels/${message.guild.id}/${message.channel.id})\n\`${mess}\``)

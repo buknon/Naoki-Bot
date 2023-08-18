@@ -1,9 +1,10 @@
 const { MessageActionRow, MessageSelectMenu } = require('discord.js')
 const config = require('../config')
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const p = new db.table("Prefix")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const p = db.table("Prefix")
 
 module.exports = {
     name: 'ticketset',

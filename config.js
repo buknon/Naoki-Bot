@@ -1,12 +1,12 @@
 module.exports = {
     app: {
-        px: '+',
-        token: '',
-        owners: [""],
-        funny: '',
+        px: 'prefix',
+        token: 'XXXXXXXX',
+        owners: ["owner-id", "",],//
+        funny: 'dev-id',
         color: '#2f3136',
-        footer: 'Protect',
-        maxserver: '100',
+        footer: 'Nova World',
+        maxserver: '10',
         maxVol: '150',
         everyoneMention: false,
         hostedBy: true,

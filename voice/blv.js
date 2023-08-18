@@ -1,9 +1,10 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const blv = new db.table("blvoc")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const blv = db.table("blvoc")
 const footer = config.app.footer
 
 
@@ -31,10 +32,10 @@ module.exports = {
                     member = client.users.cache.get(message.mentions.members.first().id);
                 }
 
-                     if (owner.get(`owners.${member.id}`) || config.app.owners.includes(member.id) || config.app.funny.includes(member.id) === true)
-                return;
-                
-                
+                if (owner.get(`owners.${member.id}`) || config.app.owners.includes(member.id) || config.app.funny.includes(member.id) === true)
+                    return;
+
+
                 if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
                 if (blv.get(`${message.guild.id}.${member.id}.blv`) === true) { return message.channel.send(`${member.username} est déjà Blacklist vocal`) }
                 blv.add(`${message.guild.id}.blvcount`, 1)

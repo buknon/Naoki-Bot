@@ -1,14 +1,15 @@
 const { Permissions, MessageEmbed, MessageActionRow, MessageSelectMenu, Message, DiscordAPIError } = require('discord.js');
 const Discord = require('discord.js')
- 
+
 const config = require('../config')
-const db = require('quick.db')
-const cl = new db.table("Color")
-const ct = new db.table("CategorieTicket")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const ct = db.table("CategorieTicket")
 const moment = require('moment')
 const fs = require('fs')
-const ticketlogg = new db.table("ticketlog")
-const dbrolestaff = new db.table("Rolestaff")
+const ticketlogg = db.table("ticketlog")
+const dbrolestaff = db.table("Rolestaff")
 const emote = require('../emotes.json')
 
 module.exports = {
@@ -118,14 +119,14 @@ module.exports = {
 
                     })
                 })
-                .catch(() => false)
+                    .catch(() => false)
                 setTimeout(() => interaction.channel.delete(), 3000)
 
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${interaction.member.id}> vient de fermé un ticket \nTicket Fermé : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
-                        if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
+                if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }
 
@@ -187,7 +188,7 @@ module.exports = {
                     .setDescription(`<@${interaction.member.id}> vient de récuperer le Transcript de son ticket \nTicket : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
-                        if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
+                if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
             if (interaction.values[0] == "delete") {
@@ -204,7 +205,7 @@ module.exports = {
             if (DejaUnChannel) return interaction.reply({ content: '❌ Vous avez déja un ticket d\'ouvert sur le serveur.', ephemeral: true })
 
             if (interaction.values[0] == "open") {
-                
+
                 let categorie = ct.fetch(`${interaction.guild.id}.categorie`)
                 if (categorie === null) {
                     interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
@@ -225,7 +226,7 @@ module.exports = {
                             },
                         ]
                     }).then((c) => {
-                        
+
                         const ticket = new MessageEmbed()
                             .setTitle('📧・Ticket')
                             .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requète pour qu\'un administrateur du serveur vienne prendre en charge votre ticket.`)

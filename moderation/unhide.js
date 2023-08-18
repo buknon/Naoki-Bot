@@ -1,12 +1,13 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const alerte = new db.table("AlertePerm")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const alerte = db.table("AlertePerm")
+const config = require("../config.js")
 const fs = require('fs')
 const moment = require('moment')
-const p2 = new db.table("Perm2")
-const p3 = new db.table("Perm3")
+const p2 = db.table("Perm2")
+const p3 = db.table("Perm3")
 
 module.exports = {
     name: 'unhide',
@@ -27,9 +28,9 @@ module.exports = {
                 let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel
 
                 try {
-                        channel.permissionOverwrites.edit(message.guild.id, {
-                            VIEW_CHANNEL: null,
-                        });
+                    channel.permissionOverwrites.edit(message.guild.id, {
+                        VIEW_CHANNEL: null,
+                    });
                 } catch (e) {
                     console.log(e);
                 }

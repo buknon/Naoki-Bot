@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const fs = require('fs')
- const config = require("../config.js")
+const config = require("../config.js")
 
 module.exports = {
     name: 'bypass',

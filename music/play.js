@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 const { QueryType } = require('discord-player');
 const emote = require('../emotes.json')
 
@@ -31,17 +32,17 @@ module.exports = {
         });
 
         const embed = new Discord.MessageEmbed()
-        .setTitle(`Lancement de votre ${res.playlist ? 'playlist' : 'musique'} ${emote.musique.yes}`)
-        .setColor(color)
+            .setTitle(`Lancement de votre ${res.playlist ? 'playlist' : 'musique'} ${emote.musique.yes}`)
+            .setColor(color)
 
         try {
             if (!queue.connection) await queue.connect(message.member.voice.channel);
         } catch {
             await player.deleteQueue(message.guild.id);
-            return message.reply({embeds: [embed]});
+            return message.reply({ embeds: [embed] });
         }
 
-        await message.reply({embeds: [embed]});
+        await message.reply({ embeds: [embed] });
 
         res.playlist ? queue.addTracks(res.tracks) : queue.addTrack(res.tracks[0]);
 

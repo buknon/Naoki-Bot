@@ -1,9 +1,10 @@
 const ms = require('ms')
 const Discord = require('discord.js')
 const { MessageEmbed } = require('discord.js');
- const config = require("../config.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const footer = config.app.footer
 
 module.exports = {

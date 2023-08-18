@@ -1,9 +1,10 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const wl = new db.table("Whitelist")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const wl = db.table("Whitelist")
 const emote = require('../emotes.json')
 
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
             let color = cl.fetch(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
-         
+
 
             if (args[0] == 'add') {
 

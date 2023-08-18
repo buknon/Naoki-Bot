@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
 const config = require('../config')
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const p3 = new db.table("Perm3")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const p3 = db.table("Perm3")
 
 module.exports = {
     name: 'unban',

@@ -1,8 +1,9 @@
 const { Connect4 } = require('discord-gamecord')
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
 const footer = config.app.footer
 
 module.exports = {
@@ -13,8 +14,8 @@ module.exports = {
         let color = cl.fetch(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
-        if (!message.mentions.members.first()) 
-        return message.reply("Veuillez mentionner un membre")
+        if (!message.mentions.members.first())
+            return message.reply("Veuillez mentionner un membre")
 
         new Connect4({
             message: message,

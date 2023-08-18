@@ -1,7 +1,8 @@
 const { Snake } = require("discord-gamecord")
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require('quick.db')
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
 const footer = config.app.footer
 
 module.exports = {

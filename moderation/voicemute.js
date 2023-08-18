@@ -1,13 +1,14 @@
 const { MessageEmbed } = require('discord.js')
 const Discord = require('discord.js')
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const ml = new db.table("modlog")
-const p1 = new db.table("Perm1")
-const p2 = new db.table("Perm2")
-const p3 = new db.table("Perm3")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const ml = db.table("modlog")
+const p1 = db.table("Perm1")
+const p2 = db.table("Perm2")
+const p3 = db.table("Perm3")
 const footer = config.app.footer
 
 
@@ -27,10 +28,10 @@ module.exports = {
             await message.client.guilds.fetch(message.guild.id);
 
             const muteUser = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-            
-           
+
+
             if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true)
-             return  message.reply("Tu ne peux pas le voicemute !")
+                return message.reply("Tu ne peux pas le voicemute !")
 
             const muteReason = args.join(" ").slice(23);
 
@@ -70,7 +71,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({ text: `📚` })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
         }
     }

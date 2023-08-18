@@ -1,8 +1,9 @@
 const Discord = module.require("discord.js");
 const moment = require('moment')
-const db = require('quick.db')
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const config = require("../config.js")
 
 module.exports = {
     name: 'userinfo',
@@ -56,14 +57,14 @@ module.exports = {
             "false": "L'utilisateur est un humain"
         };
         const userlol = new Discord.MessageEmbed()
-            .setAuthor({name: `Informations`, iconURL: mention.user.avatarURL()})
+            .setAuthor({ name: `Informations`, iconURL: mention.user.avatarURL() })
             .setThumbnail(usericon)
             .addField(`General`, `Nom: \`${mention.user.username}\` \nTag: \`${mention.user.discriminator}\` \nSurnom: \`${nick}\``)
             .addField(`Aperçu`, `Badges: \`${flags[mention.user.flags.toArray().join(", ")]}\`\nBot: \`${bot[mention.user.bot]}\``)
             .addField(`Informations relatives au serveur`, `Roles: <@&${mention._roles.join(">  <@&")}> \nPermissions: \`${finalPermissions.join(', ')}\``)
             .addField(`Info`, `Compte créé le: \n\`${moment(mention.user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\` \nA rejoint le serveur: \n\`${moment(mention.joinedAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\``)
             .setThumbnail(mention.user.avatarURL())
-            .setFooter({text: `ID: ${mention.user.id}`, iconURL: mention.user.avatarURL()})
+            .setFooter({ text: `ID: ${mention.user.id}`, iconURL: mention.user.avatarURL() })
             .setColor(color)
         message.channel.send({ embeds: [userlol] })
     }

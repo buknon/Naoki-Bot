@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const p = new db.table("Prefix")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const p = db.table("Prefix")
 const fs = require('fs')
- const config = require("../config.js")
+const config = require("../config.js")
 const { DiscordTogether } = require('discord-together');
 const color = config.app.color
 const footer = config.app.footer

@@ -1,10 +1,11 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
 const fs = require('fs')
 const moment = require('moment')
- const config = require("../config.js")
+const config = require("../config.js")
 const footer = config.app.footer
 
 module.exports = {

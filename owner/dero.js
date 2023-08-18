@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 const footer = config.app.footer
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
 
             message.reply({ content: `Le role ${role} à désormais accès à toutes les dérogations owners du serveur <@${message.author.id}>` })
             message.guild.channels.cache.forEach((channel, id) => {
-                try{
+                try {
                     channel.permissionOverwrites.edit(role, {
 
                         'MOVE_MEMBERS': true,
@@ -38,7 +39,7 @@ module.exports = {
                         'SPEAK': true,
                     })
                 }
-                catch(e){}
+                catch (e) { }
             }, `Perm Full dero par ${message.author.username}`);
 
             role.setPermissions((["MANAGE_ROLES", "READ_MESSAGE_HISTORY", "PRIORITY_SPEAKER", "EMBED_LINKS", "USE_EXTERNAL_STICKERS", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "CREATE_INSTANT_INVITE", "SEND_TTS_MESSAGES", "USE_EXTERNAL_EMOJIS", "VIEW_AUDIT_LOG", "MUTE_MEMBERS", "MOVE_MEMBERS", "DEAFEN_MEMBERS", "MANAGE_CHANNELS", "USE_VAD", "ADD_REACTIONS", "VIEW_CHANNEL", "SEND_MESSAGES", "MANAGE_MESSAGES", "MENTION_EVERYONE", "CONNECT", "SPEAK", "CHANGE_NICKNAME", "MANAGE_NICKNAMES", "MANAGE_EMOJIS_AND_STICKERS", "USE_APPLICATION_COMMANDS", "MANAGE_EVENTS", "MANAGE_THREADS"])).catch(() => { })

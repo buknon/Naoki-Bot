@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const config = require("../config.js")
 const fs = require('fs')
 const moment = require('moment')
 const footer = config.app.footer

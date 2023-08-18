@@ -1,10 +1,11 @@
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const ml = new db.table("modlog")
-const p3 = new db.table("Perm3")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const ml = db.table("modlog")
+const p3 = db.table("Perm3")
 
 module.exports = {
     name: 'renew',
@@ -32,7 +33,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({ text: `📚` })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
         }
 
     }

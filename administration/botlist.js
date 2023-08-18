@@ -1,10 +1,11 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
- const config = require("../config.js")
-const p2 = new db.table("Perm2")
-const p3 = new db.table("Perm3")
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const config = require("../config.js")
+const p2 = db.table("Perm2")
+const p3 = db.table("Perm3")
+const cl = db.table("Color")
 const fs = require('fs')
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
 
         const perm2 = p2.fetch(`perm2_${message.guild.id}`)
         const perm3 = p3.fetch(`perm3_${message.guild.id}`)
-  
+
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm2) || message.member.roles.cache.has(perm3) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             let bots = message.guild.members.cache.filter(m => m.user.bot).size;

@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 let started_time_duration = ""
 let time_duration = ""
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const ml = new db.table("giveawaylog")
-const pga = new db.table("PermGa")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const ml = db.table("giveawaylog")
+const pga = db.table("PermGa")
 
 module.exports = {
     name: 'giveaway',

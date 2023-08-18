@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 const fs = require('fs')
 const footer = config.app.footer
 
@@ -16,7 +17,7 @@ module.exports = {
         if (color == null) color = config.app.color
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        
+
         const url = await member.user.fetch().then((user) => user.bannerURL({ format: "png", dynamic: true, size: 4096 }));
 
         const ERRbannerEmbed = new Discord.MessageEmbed()

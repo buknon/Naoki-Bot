@@ -1,26 +1,27 @@
 const Discord = require("discord.js")
- const config = require("../config.js")
+const config = require("../config.js")
 const footer = config.app.footer
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const punish = new db.table("Punition")
-const cl = new db.table("Color")
-const atc = new db.table("antichannelcreate")
-const atd = new db.table("antichanneldelete")
-const acu = new db.table("antichannelupdate")
-const al = new db.table("AntiLink")
-const atr = new db.table("antirolecreate")
-const ard = new db.table("antiroledelete")
-const aru = new db.table("antiroleupdate")
-const aw = new db.table("antiwebhook")
-const agu = new db.table("Guildupdate")
-const atb = new db.table("Antibot")
-const aba = new db.table("Antiban")
-const ae = new db.table("Antieveryone")
-const ad = new db.table("Antidown")
-const lock = new db.table("Serverlock")
-const aa = new db.table("Antiadmin")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const punish = db.table("Punition")
+const cl = db.table("Color")
+const atc = db.table("antichannelcreate")
+const atd = db.table("antichanneldelete")
+const acu = db.table("antichannelupdate")
+const al = db.table("AntiLink")
+const atr = db.table("antirolecreate")
+const ard = db.table("antiroledelete")
+const aru = db.table("antiroleupdate")
+const aw = db.table("antiwebhook")
+const agu = db.table("Guildupdate")
+const atb = db.table("Antibot")
+const aba = db.table("Antiban")
+const ae = db.table("Antieveryone")
+const ad = db.table("Antidown")
+const lock = db.table("Serverlock")
+const aa = db.table("Antiadmin")
 const emote = require('../emotes.json')
 
 module.exports = {
@@ -1032,7 +1033,7 @@ module.exports = {
                     }
                 })
             })
-            .catch(() => false)
+                .catch(() => false)
         }
     }
 }

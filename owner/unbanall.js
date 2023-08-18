@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
- const config = require("../config.js")
-const cl = new db.table("Color")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const config = require("../config.js")
+const cl = db.table("Color")
 const ms = require('ms')
 const emote = require('../emotes.json')
 

@@ -1,12 +1,13 @@
 const Discord = require("discord.js")
 const { Colors } = require("discord.js/src/util/Constants")
-const db = require("quick.db")
-const rlog = new db.table("raidlog")
-const wl = new db.table("Whitelist")
-const msglog = new db.table("msglog")
-const owner = new db.table("Owner")
-const al = new db.table("AntiLink")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const rlog = db.table("raidlog")
+const wl = db.table("Whitelist")
+const msglog = db.table("msglog")
+const owner = db.table("Owner")
+const al = db.table("AntiLink")
+const config = require("../config.js")
 
 const color = config.app.color
 var getNow = () => { return { time: new Date().toLocaleString("en-GB", { timeZone: "Europe/Paris", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" }) } }

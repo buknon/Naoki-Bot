@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 
 module.exports = {
     name: 'buttonrole',
@@ -18,7 +19,7 @@ module.exports = {
             const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0])
             const msg = args.slice(1).join(" ")
 
-         
+
             const embed = new Discord.MessageEmbed()
                 .setTitle(`Prends ton role`)
                 .setDescription(`${msg}\n__Role :__ ${role}`)

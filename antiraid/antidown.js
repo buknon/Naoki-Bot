@@ -1,10 +1,11 @@
 const Discord = require("discord.js")
- const config = require("../config.js")
-const db = require("quick.db")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const ad = new db.table("Antidown")
+const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const ad = db.table("Antidown")
 
 module.exports = {
     name: 'antidown',
@@ -23,7 +24,7 @@ module.exports = {
                     .setDescription(`**L'anti down** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
-                
+
             } else if (args[0] == 'off') {
                 ad.set(`config.${message.guild.id}.antidown`, false)
                 const embed = new Discord.MessageEmbed()

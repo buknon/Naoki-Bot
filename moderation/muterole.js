@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
- const config = require("../config.js")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const config = require("../config.js")
 const footer = config.app.footer
 const emote = require('../emotes.json')
 
@@ -32,14 +33,14 @@ module.exports = {
                     const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
                     channels.forEach(channel => {
 
-                        try{
+                        try {
                             channel.permissionOverwrites.edit(muterole, {
                                 SEND_MESSAGES: false,
                                 CONNECT: false,
                                 ADD_REACTIONS: false
                             }, "Muterole")
                         }
-                        catch(e){}
+                        catch (e) { }
                         embed2.setDescription(`**__D'autres permission déjà existantes peuvent rendre innefficace le mute pour certains rôles dans les salons suivants :__**\n\n**${channel.name}**\n- ${muterole.name}\n`, true)
                         embed2.setFooter({ text: "Tous les rôles ayant la permissons \"envoyer des messages\" en vert seront insensible au mute" })
 
@@ -57,14 +58,14 @@ module.exports = {
                     muterole = await message.guild.roles.create()
                     await muterole.setName('muet')
                     await muterole.setPermissions([])
-                    try{
+                    try {
                         message.guild.channels.cache.forEach(channel => channel.permissionOverwrites.edit(muterole, {
                             SEND_MESSAGES: false,
                             CONNECT: false,
                             ADD_REACTIONS: false
                         }, "Muterole"))
                     }
-                    catch(e){}
+                    catch (e) { }
                     db.set(`muterole_${message.guild.id}`, `${muterole.id}`)
                     const e = new Discord.MessageEmbed()
                     e.setColor(color)

@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 let started_time_duration = ""
 let time_duration = ""
-const db = require('quick.db')
- const config = require("../config.js")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const pga = new db.table("PermGa")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const config = require("../config.js")
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const pga = db.table("PermGa")
 
 module.exports = {
     name: 'reroll',
@@ -23,15 +24,15 @@ module.exports = {
             if (color == null) color = config.app.color
 
             if (!args[0])
-            return message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``)
-        
+                return message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``)
+
             await client.giveawaysManager.reroll(args[0], {
                 messages: {
                     congrat: ':tada: Nouveau gagnant(s): {winners}! Félicitation, tu as gagné **{this.prize}**!',
                     error: 'Aucun membre de participe à ce giveaway, le(s) gagnant(s) ne peuvent pas être choisi!'
                 }
             })
-            .catch(() => message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``))
+                .catch(() => message.reply(`Aucun giveaway de trouvé pour \`${args[0] || 'rien'}\``))
         }
     }
 }

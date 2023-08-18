@@ -1,8 +1,9 @@
 const Discord = require('discord.js')
 const config = require('../config')
-const db = require('quick.db')
-const cl = new db.table("Color")
-const pfp = new db.table("Pfp")
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const cl = db.table("Color")
+const pfp = db.table("Pfp")
 module.exports = {
     name: 'ready',
     once: true,
@@ -10,18 +11,18 @@ module.exports = {
     async execute(client) {
         const status = db.get('stream');
         const type = db.get('type');
-        client.user.setActivity(status, { type: type, url: "https://twitch.tv/karma"});
-         console.log("Naoki Yoko Perso")
-          console.log("---------------------------------------")
-          console.log(`> [BOT]: ${client.user.username} est en ligne !`)
-          console.log(`> [PREFIX]: ${config.app.px}`);
-        
-console.log("---------------------------------------")
-          console.log(`> [INVITE]: https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`)
+        client.user.setActivity(status, { type: type, url: "https://twitch.tv/karma" });
+        console.log("Naoki Yoko Perso")
+        console.log("---------------------------------------")
+        console.log(`> [BOT]: ${client.user.username} est en ligne !`)
+        console.log(`> [PREFIX]: ${config.app.px}`);
+
+        console.log("---------------------------------------")
+        console.log(`> [INVITE]: https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`)
 
         setInterval(() => {
             client.guilds.cache.forEach(async guild => {
-                
+
                 let color = cl.fetch(`color_${guild.id}`)
                 if (color == null) color = config.app.color
 
@@ -43,9 +44,9 @@ console.log("---------------------------------------")
             })
         }, ms("30s"))
 
-        
-if (db.get('stream') === null) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
-if (db.get('stream') === undefined) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
-if (db.get('stream') === false) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
-        }
+
+        if (db.get('stream') === null) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
+        if (db.get('stream') === undefined) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
+        if (db.get('stream') === false) return client.user.setActivity(`${client.users.cache.size} utilisateurs !`, { type: "WATCHING", url: 'https://www.twitch.tv/karma' });
     }
+}
