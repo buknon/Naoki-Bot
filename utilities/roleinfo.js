@@ -19,7 +19,7 @@ module.exports = {
       let color = await cl.get(`color_${message.guild.id}`)
       if (color == null) color = config.app.color
 
-      const perm1 = p1.fetch(`perm1_${message.guild.id}`)
+      const perm1 = await p1.get(`perm1_${message.guild.id}`)
       const perm2 = await p2.get(`perm2_${message.guild.id}`)
       const perm3 = await p3.get(`perm3_${message.guild.id}`)
 

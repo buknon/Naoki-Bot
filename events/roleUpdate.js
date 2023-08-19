@@ -43,7 +43,7 @@ module.exports = {
         const audit = await oldRole.guild.fetchAuditLogs({ type: "ROLE_UPDATE" }).then((audit) => audit.entries.first())
         if (audit.executor.id === client.user.id) return
 
-        let isOn = await aru.fetch(`config.${oldRole.guild.id}.antiroleupdate`)
+        let isOn = await aru.get(`config.${oldRole.guild.id}.antiroleupdate`)
 
         if (isOn == true) {
 
@@ -80,7 +80,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifié un role\`, il a été sanctionné`)
                     .setTimestamp()
-                const channel = client.channels.cache.get(rlog.fetch(`${oldRole.guild.id}.raidlog`))
+                const channel = client.channels.cache.get(await rlog.get(`${oldRole.guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

@@ -90,7 +90,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyer un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message`)
                     .setTimestamp()
-                client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
+                client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
             }
 
         }
@@ -108,7 +108,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyer un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -131,7 +131,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a mentionner \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

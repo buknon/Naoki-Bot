@@ -27,7 +27,7 @@ module.exports = {
                 let color = await cl.get(`color_${message.guild.id}`)
                 if (color == null) color = config.app.color
 
-                let perm1 = `<@&${p1.fetch(`perm1_${message.guild.id}`)}>`
+                let perm1 = `<@&${await p1.get(`perm1_${message.guild.id}`)}>`
                 if (perm1 == `<@&null>`) perm1 = "Non configuré"
 
                 let perm2 = `<@&${await p2.get(`perm2_${message.guild.id}`)}>`
@@ -36,13 +36,13 @@ module.exports = {
                 let perm3 = `<@&${await p3.get(`perm3_${message.guild.id}`)}>`
                 if (perm3 == `<@&null>`) perm3 = "Non configuré"
 
-                let permgs = `<@&${pgs.fetch(`permgs_${message.guild.id}`)}>`
+                let permgs = `<@&${await pgs.get(`permgs_${message.guild.id}`)}>`
                 if (permgs == `<@&null>`) permgs = "Non configuré"
 
                 let permgp = `<@&${await pgp.get(`permgp_${message.guild.id}`)}>`
                 if (permgp == `<@&null>`) permgp = "Non configuré"
 
-                let permga = `<@&${pga.fetch(`permga_${message.guild.id}`)}>`
+                let permga = `<@&${await pga.get(`permga_${message.guild.id}`)}>`
                 if (permga == `<@&null>`) permga = "Non configuré"
 
 

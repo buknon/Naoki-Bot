@@ -17,7 +17,7 @@ module.exports = {
         const audit = await channel.guild.fetchAuditLogs({ type: "CHANNEL_DELETE" }).then((audit) => audit.entries.first())
         if (audit.executor === client.user.id) return
 
-        if (atd.fetch(`config.${channel.guild.id}.antichanneldelete`) == true) {
+        if (await atd.get(`config.${channel.guild.id}.antichanneldelete`) == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -43,7 +43,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`supprimé\` un salon, il a été sanctionné`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${channel.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${channel.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }

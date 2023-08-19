@@ -41,7 +41,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${action.executor.id}> a \`banni\` un membre, il a été sanctionné`)
                     .setTimestamp()
-                client.channels.cache.get(rlog.fetch(`${user.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
+                client.channels.cache.get(await rlog.get(`${user.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
 
             }
         }

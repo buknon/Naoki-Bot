@@ -17,7 +17,7 @@ module.exports = {
         const audit = await channel.guild.fetchAuditLogs({ typr: "WEBHOOK_CREATE" }).then((audit) => audit.entries.first())
         if (audit?.executor?.id == client.user.id) return
 
-        if (aw.fetch(`config.${channel.guild.id}.antiwebhook`) == true) {
+        if (await aw.get(`config.${channel.guild.id}.antiwebhook`) == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -50,7 +50,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de créer un \`webhook\`, il a été sanctionné`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${channel.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${channel.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }

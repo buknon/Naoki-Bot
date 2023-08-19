@@ -16,7 +16,7 @@ module.exports = {
 
         const audit = await role.guild.fetchAuditLogs({ type: "ROLE_DELETE" }).then(async (audit) => audit.entries.first());
 
-        if (ard.fetch(`config.${role.guild.id}.antiroledelete`) == true) {
+        if (await ard.get(`config.${role.guild.id}.antiroledelete`) == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${role.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -40,7 +40,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`supprimé un role\`, il a été sanctionné`)
                     .setTimestamp()
-                if (channel) client.channels.cache.get(rlog.fetch(`${role.guild.id}.raidlog`))
+                if (channel) client.channels.cache.get(await rlog.get(`${role.guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
 

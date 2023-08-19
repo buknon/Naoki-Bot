@@ -37,7 +37,7 @@ module.exports = {
                     .setDescription(`➖ <@${message.author.id}> à utilisé la commande \`delrole\` sur ${member}\nRole retiré : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.fetch(`${message.guild.id}.modlog`))
+                const logchannel = client.channels.cache.get(await ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             } else if (message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) === true) {

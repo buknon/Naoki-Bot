@@ -17,9 +17,9 @@ module.exports = {
         const audit = await role.guild.fetchAuditLogs({ type: "ROLE_CREATE" }).then((audit) => audit.entries.first())
         if (audit.executor === client.user.id) return
 
-        if (atr.fetch(`config.${role.guild.id}.antirolecreate`) == true) {
+        if (await atr.get(`config.${role.guild.id}.antirolecreate`) == true) {
 
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${role.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
+            if (await owner.get(`owners.${audit.executor.id}`) || wl.get(`${role.guild.id}.${audit.executor.id}.wl`) || config.app.owners === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
             if (audit.action == 'ROLE_CREATE') {
 
@@ -43,7 +43,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`créer un role\`, il a été sanctionné`)
                     .setTimestamp()
-                if (channel) client.channels.cache.get(rlog.fetch(`${role.guild.id}.raidlog`))
+                if (channel) client.channels.cache.get(await rlog.get(`${role.guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
             }
