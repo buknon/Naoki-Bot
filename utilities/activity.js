@@ -16,7 +16,7 @@ module.exports = {
 
         if (!message.author) return
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
         client.discordTogether = new DiscordTogether(client);

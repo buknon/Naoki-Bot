@@ -11,7 +11,7 @@ module.exports = {
     description: `Afficher l'avatar de quelqu'un.`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         let member = message.mentions.users.first()

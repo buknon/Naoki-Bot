@@ -17,7 +17,7 @@ module.exports = {
         if (oldGuild === newGuild) return;
         let guild = newGuild
 
-        let color = cl.fetch(`color_${guild.id}`)
+        let color = await cl.get(`color_${guild.id}`)
         if (color == null) color = config.app.color
 
         if (agu.get(`guildupdate_${guild.id}`) === true) {

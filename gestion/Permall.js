@@ -16,9 +16,9 @@ module.exports = {
     description: `Permet de Désactive toutes les permissions du serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(pgp.fetch(`permgp_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await pgp.get(`permgp_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
             const roles = message.guild.roles.cache.filter(role => role.permissions.any(["ADMINISTRATOR", "MANAGE_ROLES", "KICK_MEMBERS", "BAN_MEMBERS", "MANAGE_WEBHOOKS", "MUTE_MEMBERS", "MOVE_MEMBERS", "MANAGE_GUILD"]));

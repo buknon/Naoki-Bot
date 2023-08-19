@@ -13,12 +13,12 @@ module.exports = {
     description: `Permet de mute un utilisateur sur le serveur`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
-            let muted = await db.fetch(`muterole_${message.guild.id}`)
+            let muted = await db.get(`muterole_${message.guild.id}`)
 
             let muterole = await message.guild.roles.cache.get(muted) || message.guild.roles.cache.find(role => role.name === `muet`) || message.guild.roles.cache.find(role => role.name === `Muted`) || message.guild.roles.cache.find(role => role.name === `Mute`)
             if (muterole) {

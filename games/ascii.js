@@ -14,7 +14,7 @@ module.exports = {
     description: `jeux`,
     async execute(client, message, args) {
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
         if (!args[0]) return message.channel.send(`${emote.games.no} **Veuillez fournir du texte**`);

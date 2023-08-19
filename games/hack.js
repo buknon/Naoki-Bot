@@ -13,7 +13,7 @@ module.exports = {
     description: `jeux`,
     async execute(client, message, args) {
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
 

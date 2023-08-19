@@ -12,8 +12,8 @@ module.exports = {
     description: `Permet de créer un émoji`,
     async execute(client, message, args) {
 
-        const perm2 = p2.fetch(`perm2_${message.guild.id}`)
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`)
+        const perm2 = await p2.get(`perm2_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}`)
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm2) || message.member.roles.cache.has(perm3) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 

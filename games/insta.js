@@ -10,7 +10,7 @@ module.exports = {
   usage: 'insta',
   async execute(client, message, args) {
 
-    let color = db.fetch(`color_${message.guild.id}`)
+    let color = await db.get(`color_${message.guild.id}`)
     if (color == null) color = config.app.color
 
     const insta = args[0];

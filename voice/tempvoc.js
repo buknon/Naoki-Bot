@@ -58,10 +58,10 @@ module.exports = {
                         ])
 
 
-                    let color = cl.fetch(`color_${message.guild.id}`)
+                    let color = await cl.get(`color_${message.guild.id}`)
                     if (color == null) color = config.app.color
 
-                    let pf = p.fetch(`prefix_${message.guild.id}`)
+                    let pf = await p.get(`prefix_${message.guild.id}`)
                     if (pf == null) pf = config.app.px
 
                     let tempvocsettings = db.get(`tempvocsettings_${message.guild.id}`)
@@ -175,7 +175,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                         }
                         if (i.values[0] == "active") {
-                            let link = db.fetch(`categorytempvoc_${message.guild.id}`)
+                            let link = await db.get(`categorytempvoc_${message.guild.id}`)
                             if (link == true) {
                                 message.channel.send(`✅ |\`Une catégorie \` est déjà setup`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
@@ -210,7 +210,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactive') {
-                            let link = db.fetch("messagebvn_" + message.guild.id)
+                            let link = await db.get("messagebvn_" + message.guild.id)
                             if (link == true) {
                                 //     db.set("support"+ message.guild.id , null)
                                 db.delete("messagebvn_" + message.guild.id)
@@ -236,7 +236,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                         } if (i.values[0] == "activedel") {
                             await i.deferUpdate().catch(() => false)
-                            let link = db.fetch(`salontempvoc_${message.guild.id}`)
+                            let link = await db.get(`salontempvoc_${message.guild.id}`)
                             if (link == true) {
                                 message.channel.send(`✅ |\`Le salon tempvoc \` est déjà configuré`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
@@ -268,7 +268,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactivedel') {
-                            let link = db.fetch(`support${message.guild.id}`)
+                            let link = await db.get(`support${message.guild.id}`)
                             if (link == true) {
                                 db.delete('status' + message.guild.id)
                                 message.channel.send(`❌ |\`Les vocaux temporaires \` vien d'être reset`).then(msg => {
@@ -291,7 +291,7 @@ module.exports = {
                         //activé MSG
                         if (i.values[0] === "activemodule") {
                             await i.deferUpdate().catch(() => false)
-                            let soutien = db.fetch("tempvocsettings_" + message.guild.id)
+                            let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien === true) {
                                 return message.channel.send("Les vocaux temporaires sont déjà activés").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
@@ -304,7 +304,7 @@ module.exports = {
                             }
                         } else if (i.values[0] === "desactivemodule") {
                             await i.deferUpdate().catch(() => false)
-                            let soutien = db.fetch("tempvocsettings_" + message.guild.id)
+                            let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien == true) {
                                 db.set("tempvocsettings_" + message.guild.id, null)
                                 return message.channel.send("❌ | Les vocaux temporaires viennent d'être désactivés.").then(msg => {

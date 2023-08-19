@@ -16,7 +16,7 @@ module.exports = {
     name: 'interactionCreate',
     async execute(client, interaction, message) {
 
-        let color = cl.fetch(`color_${interaction.guild.id}`)
+        let color = await cl.get(`color_${interaction.guild.id}`)
         if (color == null) color = config.app.color
 
         if (!interaction.isSelectMenu()) return;
@@ -206,7 +206,7 @@ module.exports = {
 
             if (interaction.values[0] == "open") {
 
-                let categorie = ct.fetch(`${interaction.guild.id}.categorie`)
+                let categorie = await ct.get(`${interaction.guild.id}.categorie`)
                 if (categorie === null) {
                     interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
                         type: 'GUILD_TEXT',

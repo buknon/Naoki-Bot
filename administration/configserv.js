@@ -26,7 +26,7 @@ module.exports = {
 
         const e = emote.administration.loading
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         let alerte = alertelog.get(`${message.guild.id}.alerteperm`)
@@ -56,7 +56,7 @@ module.exports = {
         let boostlog = `<#${logboost.get(`${message.guild.id}.boostlog`)}>`
         if (boostlog == null) boostlog = "Non configuré"
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
         if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {

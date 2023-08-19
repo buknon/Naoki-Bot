@@ -14,10 +14,10 @@ module.exports = {
     description: `jeux`,
     async execute(client, message, args) {
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         await QuickClick({

@@ -73,7 +73,7 @@ module.exports = {
         if (message.author.bot) return
         if (message.channel.type == "DM") return
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
         if (owner.get(`owners.${message.member.id}`) || wl.get(`${message.guild.id}.${message.member.id}.wl`) || config.app.owners === message.author.id === true) return

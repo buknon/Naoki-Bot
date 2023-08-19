@@ -9,8 +9,8 @@ module.exports = {
     once: true,
 
     async execute(client) {
-        const status = db.get('stream');
-        const type = db.get('type');
+        const status = await db.get('stream');
+        const type = await db.get('type');
         client.user.setActivity(status, { type: type, url: "https://twitch.tv/karma" });
         console.log("Naoki Yoko Perso")
         console.log("---------------------------------------")
@@ -23,10 +23,10 @@ module.exports = {
         setInterval(() => {
             client.guilds.cache.forEach(async guild => {
 
-                let color = cl.fetch(`color_${guild.id}`)
+                let color = await cl.get(`color_${guild.id}`)
                 if (color == null) color = config.app.color
 
-                const channelId = pfp.get(`${guild.id}.channelpfp`)
+                const channelId = await pfp.get(`${guild.id}.channelpfp`)
                 if (!channelId) return;
                 const channel = guild.channels.cache.get(channelId)
                 if (!channel) return;

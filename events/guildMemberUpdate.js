@@ -15,7 +15,7 @@ module.exports = {
 
     async execute(client, oldMember, newMember) {
 
-        let color = cl.fetch(`color_${oldMember.guild.id}`)
+        let color = await cl.get(`color_${oldMember.guild.id}`)
         if (color == null) color = config.app.color
 
         let channellogs = alerte.get(`${newMember.guild.id}.alerteperm`)

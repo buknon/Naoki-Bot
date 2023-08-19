@@ -13,7 +13,7 @@ module.exports = {
     description: `Afficher la bannière de quelqu'un.`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member

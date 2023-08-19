@@ -20,10 +20,10 @@ module.exports = {
         let roleping = db.get(`role_${oldRole.guild.id}`)
         if (roleping === null) roleping = "@everyone"
 
-        let color = cl.fetch(`color_${oldRole.guild.id}`)
+        let color = await cl.get(`color_${oldRole.guild.id}`)
         if (color == null) color = config.app.color
 
-        if (ad.fetch(`config.${oldRole.guild.id}.antidown`) === true) {
+        if (await ad.get(`config.${oldRole.guild.id}.antidown`) === true) {
 
             if (oldRole.rawPosition !== newRole.rawPosition) {
                 const roles = oldRole.guild.roles.cache.filter(role => role.permissions.any('MANAGE_ROLES', "ADMINISTRATOR"))

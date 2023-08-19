@@ -13,7 +13,7 @@ module.exports = {
     once: false,
 
     async execute(client, channel) {
-        let muterole = await channel.guild.roles.cache.get(db.fetch(`muterole_${channel.guild.id}`)) || channel.guild.roles.cache.find(role => role.name === `muet`) || channel.guild.roles.cache.find(role => role.name === `Muted`) || channel.guild.roles.cache.find(role => role.name === `Mute`)
+        let muterole = await channel.guild.roles.cache.get(db.get(`muterole_${channel.guild.id}`)) || channel.guild.roles.cache.find(role => role.name === `muet`) || channel.guild.roles.cache.find(role => role.name === `Muted`) || channel.guild.roles.cache.find(role => role.name === `Mute`)
         if (muterole) {
 
             channel.permissionOverwrites.edit(muterole, {

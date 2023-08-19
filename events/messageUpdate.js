@@ -60,7 +60,7 @@ module.exports = {
             }
         }
 
-        const chan = msglog.fetch(`${oldMessage.guild.id}.messagelog`)
+        const chan = await msglog.get(`${oldMessage.guild.id}.messagelog`)
         if (chan == null) return
 
         const channel = oldMessage.guild.channels.cache.get(chan)

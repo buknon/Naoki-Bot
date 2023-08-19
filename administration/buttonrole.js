@@ -13,7 +13,7 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
             const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0])

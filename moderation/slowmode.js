@@ -16,10 +16,10 @@ module.exports = {
     description: `Permet de mettre un mode lent sur un channel.`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p3.fetch(`perm3_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await p3.get(`perm3_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             const currentCooldown = message.channel.rateLimitPerUser;
             let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel

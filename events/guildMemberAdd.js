@@ -16,7 +16,7 @@ module.exports = {
 
     async execute(client, member) {
 
-        let color = cl.fetch(`color_${member.guild.id}`)
+        let color = await cl.get(`color_${member.guild.id}`)
         if (color == null) color = config.app.color
 
 
@@ -77,7 +77,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                         .setDescription(`<@${action.executor.id}> a ajouté un \`bot\` au serveur\nBot ajouté: <@${member.id}>`)
                         .setTimestamp()
-                    const channel = client.channels.cache.get(db.fetch(`${member.guild.id}.raidlog`))
+                    const channel = client.channels.cache.get(await db.get(`${member.guild.id}.raidlog`))
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 }
@@ -86,14 +86,14 @@ module.exports = {
 
         if (member.user) {
 
-            let joinsettings = db.get(`joinsettings_${member.guild.id}`)
+            let joinsettings = await db.get(`joinsettings_${member.guild.id}`)
             if (joinsettings == null) joinsettings == true
 
             if (joinsettings === true) {
 
-                const messagejoin = db.fetch(`messagebvn_${member.guild.id}`)
+                const messagejoin = await db.get(`messagebvn_${member.guild.id}`)
 
-                const salonbvn = db.fetch(`salonbvn_${member.guild.id}`)
+                const salonbvn = await db.get(`salonbvn_${member.guild.id}`)
 
                 const premiumTier = {
                     NONE: 0,
@@ -122,7 +122,7 @@ module.exports = {
 
                 if (joinsettingsmp === true) {
 
-                    const messagejoin = db.fetch(`messagebvnmp_${member.guild.id}`)
+                    const messagejoin = await db.get(`messagebvnmp_${member.guild.id}`)
 
                     const contentt = messagejoin
                         .replaceAll('{MemberName}', member)

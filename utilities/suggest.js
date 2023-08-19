@@ -14,7 +14,7 @@ module.exports = {
     description: `Permet d'afficher le derniers message supprimé sur le serveur`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         let suggest = db.get(`${message.guild.id}.suggestions`)

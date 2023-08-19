@@ -17,10 +17,10 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(pga.fetch(`permga_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
-            let pf = p.fetch(`prefix_${message.guild.id}`)
+            let pf = await p.get(`prefix_${message.guild.id}`)
             if (pf == null) pf = config.app.px
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
             if (!args[0])

@@ -25,7 +25,7 @@ module.exports = {
 
 
         if (!message.author) return
-        let chan = `${msglog.fetch(`${message.guild.id}.messagelog`)}`
+        let chan = `${await msglog.get(`${message.guild.id}.messagelog`)}`
         if (chan == null) return
 
         let channel = message.guild.channels.cache.get(chan)

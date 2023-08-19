@@ -14,13 +14,13 @@ module.exports = {
     description: `Permet d'afficher l'help.`,
     async execute(client, message, args) {
         const funny = config.app.funny
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
-        let img = db.fetch(`img_${message.guild.id}`)
+        let img = await db.get(`img_${message.guild.id}`)
         if (img == null) img = "https://share.creavite.co/NwlEYT8Z9txYAQgb.gif"
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         if (args[0] === "settings") {
@@ -128,7 +128,7 @@ module.exports = {
 
             const imgperm = "https://share.creavite.co/NwlEYT8Z9txYAQgb.gif"
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
             //Embed Help

@@ -13,7 +13,7 @@ module.exports = {
     description: `Permet de renew un salon.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p3.fetch(`perm3_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await p3.get(`perm3_${message.guild.id}`)) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             if (!message.channel.deletable) return message.reply("*Impossible de renew ce channel !*")
             message.channel.clone().then((ch) => {
@@ -24,7 +24,7 @@ module.exports = {
                 })
             })
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
 
             const embed = new Discord.MessageEmbed()

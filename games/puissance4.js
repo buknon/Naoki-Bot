@@ -11,7 +11,7 @@ module.exports = {
     usage: 'puissance4',
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
         if (!message.mentions.members.first())
