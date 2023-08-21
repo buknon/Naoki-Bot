@@ -79,11 +79,11 @@ for (const file of giveawayFiles) {
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  games Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
-// const gamesFiles = readdirSync('./games').filter(file => file.endsWith('.js'));
-// for (const file of gamesFiles) {
-//     const command = require(`./games/${file}`);
-//     client.commands.set(command.name, command);
-// }
+ const gamesFiles = readdirSync('./games').filter(file => file.endsWith('.js'));
+ for (const file of gamesFiles) {
+     const command = require(`./games/${file}`);
+     client.commands.set(command.name, command);
+ }
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  antiraid Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
@@ -103,11 +103,11 @@ for (const file of buyerFiles) {
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  music Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
-// const musicFiles = readdirSync('./music').filter(file => file.endsWith('.js'));
-// for (const file of musicFiles) {
-//     const command = require(`./music/${file}`);
-//     client.commands.set(command.name, command);
-// }
+ const musicFiles = readdirSync('./music').filter(file => file.endsWith('.js'));
+ for (const file of musicFiles) {
+     const command = require(`./music/${file}`);
+     client.commands.set(command.name, command);
+ }
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| commande  voice Handler |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
