@@ -13,7 +13,7 @@ module.exports = {
     description: `Permet d'unban toutes les personnes du serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (await owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color

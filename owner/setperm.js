@@ -19,7 +19,7 @@ module.exports = {
     description: `Permet de gérer les permissions des roles du serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (await owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
@@ -30,10 +30,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la **perm 1**" })
 
-                if (p1.get(`perm1_${message.guild.id}`) === role.id) {
+                if (await p1.get(`perm1_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la **perm 1**` })
                 } else {
-                    p1.set(`perm1_${message.guild.id}`, role.id)
+                    await p1.set(`perm1_${message.guild.id}`, role.id)
 
                     const embed1 = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la **perm 1**`)
@@ -48,10 +48,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la **perm 2**" })
 
-                if (p2.get(`perm2_${message.guild.id}`) === role.id) {
+                if (await p2.get(`perm2_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la **perm 2** !` })
                 } else {
-                    p2.set(`perm2_${message.guild.id}`, role.id)
+                    await p2.set(`perm2_${message.guild.id}`, role.id)
 
                     const embed2 = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la **perm 2**`)
@@ -66,10 +66,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la **perm 3**" })
 
-                if (p3.get(`perm3_${message.guild.id}`) === role.id) {
+                if (await p3.get(`perm3_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la **perm 3**` })
                 } else {
-                    p3.set(`perm3_${message.guild.id}`, role.id)
+                    await p3.set(`perm3_${message.guild.id}`, role.id)
 
                     const embed3 = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la **perm 3**`)
@@ -84,10 +84,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la perm **Gestion Staff**" })
 
-                if (pgs.get(`permgs_${message.guild.id}`) === role.id) {
+                if (await pgs.get(`permgs_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la perm **Gestion Staff**` })
                 } else {
-                    pgs.set(`permgs_${message.guild.id}`, role.id)
+                    await pgs.set(`permgs_${message.guild.id}`, role.id)
 
                     const embedgs = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la perm **Gestion Staff**`)
@@ -102,10 +102,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la perm **Gestion Permissions**" })
 
-                if (pgp.get(`permgp_${message.guild.id}`) === role.id) {
+                if (await pgp.get(`permgp_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la perm **Gestion Permissions**` })
                 } else {
-                    pgp.set(`permgp_${message.guild.id}`, role.id)
+                    await pgp.set(`permgp_${message.guild.id}`, role.id)
 
                     const embedgp = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la perm **Gestion Permissions**`)
@@ -120,10 +120,10 @@ module.exports = {
 
                 if (!role) return message.channel.send({ content: "Veuillez indiquer le role que vous souhaitez attribué à la perm **Giveaway**" })
 
-                if (pga.get(`permga_${message.guild.id}`) === role.id) {
+                if (await pga.get(`permga_${message.guild.id}`) === role.id) {
                     return message.channel.send({ content: `Le role ${role} est déjà attribué à la perm **Giveaway**` })
                 } else {
-                    pga.set(`permga_${message.guild.id}`, role.id)
+                    await pga.set(`permga_${message.guild.id}`, role.id)
 
                     const embedga = new Discord.MessageEmbed()
                         .setDescription(`Le role ${role} à désormais accès à toutes les commandes de la perm **Giveaway**`)

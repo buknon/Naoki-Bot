@@ -33,7 +33,7 @@ module.exports = {
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }
 
-        if (db.get(`blacklist.${member.id}`)) {
+        if (await db.get(`blacklist.${member.id}`)) {
 
             member.send({ content: `Vous etes blacklist de **${member.guild.name}** vous ne pouvez pas rejoindre le serveur` })
             member.guild.members.ban(member.id, { reason: `Blacklist` })
@@ -47,7 +47,7 @@ module.exports = {
 
         if (member.user.bot) {
 
-            if (atb.get(`config.${member.guild.id}.antibot`) === true) {
+            if (await atb.get(`config.${member.guild.id}.antibot`) === true) {
 
                 const action = await member.guild.fetchAuditLogs({ limit: 1, type: "BOT_ADD" }).then(async (audit) => audit.entries.first());
                 if (action.executor.id === client.user.id) return;

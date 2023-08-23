@@ -12,7 +12,7 @@ module.exports = {
     description: `Permet de blacklist des membres`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (await owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.app.color
@@ -28,26 +28,26 @@ module.exports = {
 
 
 
-                if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) return;
+                if (await owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) return;
 
-                if (db.get(`blacklist.${member.id}`) === member.id) { return message.channel.send(`${member.username} est déjà blacklist`) }
-
-
-
-
-
-                db.push(`${config.app.blacklist}.blacklist`, member.id)
+                if (await db.get(`blacklist.${member.id}`) === member.id) { return message.channel.send(`${member.username} est déjà blacklist`) }
 
 
 
 
-                db.set(`blacklist.${member.id}`, member.id)
+
+                await db.push(`${config.app.blacklist}.blacklist`, member.id)
+
+
+
+
+                await db.set(`blacklist.${member.id}`, member.id)
                 member.kick(`Blacklist par ${message.author.username}`)
                 message.channel.send(`<@${member.id}> est maintenant blacklist`)
 
             } else if (!args[0]) {
 
-                let own = db.get(`${config.app.blacklist}.blacklist`)
+                let own = await db.get(`${config.app.blacklist}.blacklist`)
                 let p0 = 0;
                 let p1 = 30;
                 let page = 1;

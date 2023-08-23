@@ -25,9 +25,9 @@ module.exports = {
                     catch (e) {
                         return message.channel.send(`Aucun utilisateur de trouvÃ© pour \`${args[0] || "rien"}\``)
                     }
-                if (db.get(`blacklist.${member.id}`) === null) { return message.channel.send(`${member.username} n'est pas blacklist`) }
-                db.set(`${config.app.blacklist}.blacklist`, db.get(`${config.app.blacklist}.blacklist`).filter(s => s !== member.id))
-                db.delete(`blacklist.${member.id}`, member.id)
+                if (await db.get(`blacklist.${member.id}`) === null) { return message.channel.send(`${member.username} n'est pas blacklist`) }
+                await db.set(`${config.app.blacklist}.blacklist`, db.get(`${config.app.blacklist}.blacklist`).filter(s => s !== member.id))
+                await db.delete(`blacklist.${member.id}`, member.id)
 
                 message.channel.send(`**__${member.username}__** est maintenant unblacklist`)
 

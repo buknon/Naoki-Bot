@@ -29,37 +29,37 @@ module.exports = {
         let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.app.color
 
-        let alerte = alertelog.get(`${message.guild.id}.alerteperm`)
+        let alerte = await alertelog.get(`${message.guild.id}.alerteperm`)
         if (alerte == null) alerte = "Non configuré"
 
-        let ticket = ct.get(`${message.guild.id}.categorie`)
+        let ticket = await ct.get(`${message.guild.id}.categorie`)
         if (ticket == null) ticket = "Non configuré"
 
-        let role = db.get(`role_${message.guild.id}`)
+        let role = await db.get(`role_${message.guild.id}`)
         if (role == null) role = "Non configuré"
 
-        let ticketlog = `<#${logticket.get(`${message.guild.id}.ticketlog`)}>`
+        let ticketlog = `<#${await logticket.get(`${message.guild.id}.ticketlog`)}>`
         if (ticketlog == null) ticketlog = "Non configuré"
 
-        let raidlog = `<#${lograid.get(`${message.guild.id}.raidlog`)}>`
+        let raidlog = `<#${await lograid.get(`${message.guild.id}.raidlog`)}>`
         if (raidlog == null) raidlog = "Non configuré"
 
-        let embedlog = `<#${logembed.get(`${message.guild.id}.embedlog`)}>`
+        let embedlog = `<#${await logembed.get(`${message.guild.id}.embedlog`)}>`
         if (embedlog == null) embedlog = "Non configuré"
 
-        let messagelog = `<#${msglog.get(`${message.guild.id}.messagelog`)}>`
+        let messagelog = `<#${await msglog.get(`${message.guild.id}.messagelog`)}>`
         if (messagelog == null) messagelog = "Non configuré"
 
-        let modlog = `<#${logmod.get(`${message.guild.id}.modlog`)}>`
+        let modlog = `<#${await logmod.get(`${message.guild.id}.modlog`)}>`
         if (modlog == null) modlog = "Non configuré"
 
-        let boostlog = `<#${logboost.get(`${message.guild.id}.boostlog`)}>`
+        let boostlog = `<#${await logboost.get(`${message.guild.id}.boostlog`)}>`
         if (boostlog == null) boostlog = "Non configuré"
 
         let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.app.px
 
-        if (owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
+        if (await owner.get(`owners.${message.author.id}`) || config.app.owners.includes(message.author.id) || config.app.funny.includes(message.author.id) === true) {
 
             const embed = new Discord.MessageEmbed()
                 .addField(`Configuration du serveur`, `${emote.administration.alerte} | Salon d'alerte : <#${alerte}> \n${emote.administration.ping} | Role alerte : ${role}\n📧 | Catégorie tickets : \`${ticket}\`\n${emote.administration.rainbowheart} | Thème : ${color}`)

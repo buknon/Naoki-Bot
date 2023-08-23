@@ -13,8 +13,8 @@ module.exports = {
             if (args.join(" ").length > 20) return message.reply("le status ne peux pas faire plus de 20 caracteres")
 
             client.user.setActivity(status, { type: "STREAMING", url: "https://twitch.tv/karma" })
-            db.set('stream', status)
-            db.set('type', "STREAMING")
+            await db.set('stream', status)
+            await db.set('type', "STREAMING")
             message.reply(`Le bot stream dès à présent : **${status}**`)
 
 
